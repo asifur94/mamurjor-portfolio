@@ -45,9 +45,8 @@
           <div class="col-12 col-lg-12">
             <div class="card">
                 <div class="card-body p-4">
- <h1>Edit Skill</h1>
-
-    @if ($errors->any())
+                    <h5 class="mb-4">Edit Hero Area</h5>
+                     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -57,20 +56,17 @@
         </div>
     @endif
 
-    <form action="{{ route('skills.update', $skill->id) }}" method="POST">
+    <form action="{{ route('counters.store') }}" method="POST">
         @csrf
-        @method('PUT')
         <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ $skill->title }}" required>
+            <label for="name">Name:</label>
+            <input type="text" name="name" class="form-control" required>
         </div>
-
         <div class="form-group">
-            <label for="progress">Progress (%)</label>
-            <input type="number" name="progress" class="form-control" value="{{ $skill->progress }}" required min="0" max="100">
+            <label for="value">Value:</label>
+            <input type="number" name="value" class="form-control" required>
         </div>
-
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Create</button>
     </form>
 
 

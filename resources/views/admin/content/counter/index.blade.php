@@ -32,45 +32,37 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>SL.</th>
-                            <th>Subject</th>
-                            <th>Number</th>
-                            <th>Icon</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Tiger Nixon</td>
-                            <td><i class="material-icons-outlined">edit</i></td>
-                            <td>3 days</td>
+                 @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-                            <td>
-                                <div class="d-flex ">
-                                    <button type="button" class="btn btn-dark d-flex align-items-center ">
-                                        <i class="material-icons-outlined">edit</i> Edit
-                                    </button>
-                                    <button type="button" class="btn btn-danger d-flex align-items-center ">
-                                        <i class="material-icons-outlined">delete</i> Delete
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>SL.</th>
-                            <th>Subject</th>
-                            <th>Number</th>
-                            <th>Icon</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($counters as $counter)
+                <tr>
+                    <td>{{ $counter->id }}</td>
+                    <td>{{ $counter->name }}</td>
+                    <td>{{ $counter->value }}</td>
+                    <td>
+                        <a href="{{ route('counters.edit', $counter->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('counters.destroy', $counter->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
             </div>
         </div>
     </div>

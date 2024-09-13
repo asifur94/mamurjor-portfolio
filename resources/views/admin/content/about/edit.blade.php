@@ -45,64 +45,74 @@
           <div class="col-12 col-lg-12">
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="mb-4">Edit Hero Area</h5>
-                    <form action="{{ route('heroUpdate') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+                     <h1>Edit About Entry</h1>
 
-                        <!-- Heading Display -->
-                        <div class="row mb-3">
-                            <label for="heading" class="col-sm-3 col-form-label">Heading</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="heading" name="heading" value="{{ old('heading', $heroArea->heading) }}">
-                            </div>
-                        </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-                        <!-- Sub Heading Display -->
-                        <div class="row mb-3">
-                            <label for="subheading" class="col-sm-3 col-form-label">Sub Heading</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="subheading" name="subheading" value="{{ old('subheading', $heroArea->subheading) }}">
-                            </div>
-                        </div>
+    <form action="{{ route('about.update', $about->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-                        <!-- Background Image Display -->
-                        <div class="row mb-3">
-                            <label for="background_image" class="col-sm-3 col-form-label">Background Image</label>
-                            <div class="col-sm-9">
-                                @if($heroArea->background_image)
-                                    <img src="{{ asset('storage/' . $heroArea->background_image) }}" height="180" alt="Background Image">
-                                @endif
-                                <input type="file" class="form-control" id="background_image" name="background_image">
-                            </div>
-                        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" class="form-control" value="{{ $about->title }}" required>
+        </div>
 
-                        <!-- Resume Display -->
-                        <div class="row mb-3">
-                            <label for="resume" class="col-sm-3 col-form-label">Resume</label>
-                            <div class="col-sm-9">
-                                @if($heroArea->file_path)
-                                    <a href="{{ asset('storage/' . $heroArea->file_path) }}" class="btn btn-outline-primary">Download Resume</a>
-                                @endif
-                                <input type="file" class="form-control" id="resume" name="resume">
-                            </div>
-                        </div>
+        <div class="form-group">
+            <label for="sub_title">Sub Title</label>
+            <input type="text" name="sub_title" id="sub_title" class="form-control" value="{{ $about->sub_title }}" required>
+        </div>
 
-                        <!-- Button Text Display -->
-                        <div class="row mb-3">
-                            <label for="button_text" class="col-sm-3 col-form-label">Button Text</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="button_text" name="button_text" value="{{ old('button_text', $heroArea->button_text) }}">
-                            </div>
-                        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control" required>{{ $about->description }}</textarea>
+        </div>
 
-                        <!-- Submit Button -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                    </form>
+        <div class="form-group">
+            <label for="btn_text">Button Text</label>
+            <input type="text" name="btn_text" id="btn_text" class="form-control" value="{{ $about->btn_text }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="btn_url">Button URL</label>
+            <input type="text" name="btn_url" id="btn_url" class="form-control" value="{{ $about->btn_url }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="birth_date">Birth Date</label>
+            <input type="text" name="birth_date" id="birth_date" class="form-control" value="{{ $about->birth_date }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="{{ $about->email }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone" class="form-control" value="{{ $about->phone }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="skype_username">Skype Username</label>
+            <input type="text" name="skype_username" id="skype_username" class="form-control" value="{{ $about->skype_username }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea name="address" id="address" class="form-control" required>{{ $about->address }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+    </form>
 
 
 

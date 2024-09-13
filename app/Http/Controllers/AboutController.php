@@ -9,37 +9,74 @@ class AboutController extends Controller
 {
     public function index()
     {
-        return view('admin.content.about.index');
+        $abouts = About::all();
+        return view('admin.content.about.index', compact('abouts'));
     }
 
     public function create()
     {
-        // Show form to create a new about entry
+        return view('admin.content.about.create');
     }
 
     public function store(Request $request)
     {
-        // Validate and store a new about entry
+        $request->validate([
+            'title' => 'required|max:300',
+            'sub_title' => 'required|max:300',
+            'description' => 'required',
+            'btn_text' => 'required|max:300',
+            'btn_url' => 'required',
+            'birth_date' => 'required',
+            'email' => 'required|email|max:300',
+            'phone' => 'required',
+            'skype_username' => 'required|max:300',
+            'address' => 'required',
+        ]);
+
+        About::create($request->all());
+
+        return redirect()->route('about.index')->with('success', 'About entry created successfully.');
     }
 
     public function show($id)
     {
-        // Display a specific about entry
+        $about = About::findOrFail($id);
+        return view('admin.content.about.show', compact('about'));
     }
 
     public function edit($id)
     {
-        // Show form to edit an existing about entry
+        $about = About::findOrFail($id);
+        return view('admin.content.about.edit', compact('about'));
     }
 
     public function update(Request $request, $id)
     {
-        // Validate and update an existing about entry
+        $request->validate([
+            'title' => 'required|max:300',
+            'sub_title' => 'required|max:300',
+            'description' => 'required',
+            'btn_text' => 'required|max:300',
+            'btn_url' => 'required',
+            'birth_date' => 'required',
+            'email' => 'required|email|max:300',
+            'phone' => 'required',
+            'skype_username' => 'required|max:300',
+            'address' => 'required',
+        ]);
+
+        $about = About::findOrFail($id);
+        $about->update($request->all());
+
+        return redirect()->route('about.index')->with('success', 'About entry updated successfully.');
     }
 
     public function destroy($id)
     {
-        // Delete a specific about entry
+        $about = About::findOrFail($id);
+        $about->delete();
+
+        return redirect()->route('about.index')->with('success', 'About entry deleted successfully.');
     }
 }
 

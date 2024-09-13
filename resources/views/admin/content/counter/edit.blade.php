@@ -46,63 +46,29 @@
             <div class="card">
                 <div class="card-body p-4">
                     <h5 class="mb-4">Edit Hero Area</h5>
-                    <form action="{{ route('heroUpdate') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+                     @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-                        <!-- Heading Display -->
-                        <div class="row mb-3">
-                            <label for="heading" class="col-sm-3 col-form-label">Heading</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="heading" name="heading" value="{{ old('heading', $heroArea->heading) }}">
-                            </div>
-                        </div>
-
-                        <!-- Sub Heading Display -->
-                        <div class="row mb-3">
-                            <label for="subheading" class="col-sm-3 col-form-label">Sub Heading</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="subheading" name="subheading" value="{{ old('subheading', $heroArea->subheading) }}">
-                            </div>
-                        </div>
-
-                        <!-- Background Image Display -->
-                        <div class="row mb-3">
-                            <label for="background_image" class="col-sm-3 col-form-label">Background Image</label>
-                            <div class="col-sm-9">
-                                @if($heroArea->background_image)
-                                    <img src="{{ asset('storage/' . $heroArea->background_image) }}" height="180" alt="Background Image">
-                                @endif
-                                <input type="file" class="form-control" id="background_image" name="background_image">
-                            </div>
-                        </div>
-
-                        <!-- Resume Display -->
-                        <div class="row mb-3">
-                            <label for="resume" class="col-sm-3 col-form-label">Resume</label>
-                            <div class="col-sm-9">
-                                @if($heroArea->file_path)
-                                    <a href="{{ asset('storage/' . $heroArea->file_path) }}" class="btn btn-outline-primary">Download Resume</a>
-                                @endif
-                                <input type="file" class="form-control" id="resume" name="resume">
-                            </div>
-                        </div>
-
-                        <!-- Button Text Display -->
-                        <div class="row mb-3">
-                            <label for="button_text" class="col-sm-3 col-form-label">Button Text</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="button_text" name="button_text" value="{{ old('button_text', $heroArea->button_text) }}">
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                    </form>
+    <form action="{{ route('counters.update', $counter->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" class="form-control" value="{{ $counter->name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="value">Value:</label>
+            <input type="number" name="value" class="form-control" value="{{ $counter->value }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
 
 
 

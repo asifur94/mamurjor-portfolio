@@ -32,48 +32,37 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>SL.</th>
-                            <th>Name</th>
-                            <th>Year</th>
-                            <th>designation</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Tiger Nixon</td>
-                            <td>$320,800</td>
-                            <td>3 days</td>
-                            <td>Lorem ipsum dolor sit amet.
-                            </td>
-                            <td>
-                                <div class="d-flex ">
-                                    <button type="button" class="btn btn-dark d-flex align-items-center ">
-                                        <i class="material-icons-outlined">edit</i> Edit
-                                    </button>
-                                    <button type="button" class="btn btn-danger d-flex align-items-center ">
-                                        <i class="material-icons-outlined">delete</i> Delete
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>SL.</th>
-                            <th>Name</th>
-                            <th>Year</th>
-                            <th>designation</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                 <a href="{{ route('resume.create') }}" class="btn btn-primary">Add Resume</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Skill Year</th>
+                <th>Description</th>
+                <th>Designation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($resumes as $resume)
+                <tr>
+                    <td>{{ $resume->name }}</td>
+                    <td>{{ $resume->skill_year }}</td>
+                    <td>{{ $resume->description }}</td>
+                    <td>{{ $resume->designation }}</td>
+                    <td>
+                        <a href="{{ route('resume.edit', $resume->id) }}">Edit</a>
+                        <form action="{{ route('resume.destroy', $resume->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
             </div>
         </div>
     </div>

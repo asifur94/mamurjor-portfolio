@@ -45,7 +45,8 @@
           <div class="col-12 col-lg-12">
             <div class="card">
                 <div class="card-body p-4">
- <h1>Edit Skill</h1>
+
+                     <h1>Create Skill</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -57,22 +58,20 @@
         </div>
     @endif
 
-    <form action="{{ route('skills.update', $skill->id) }}" method="POST">
+    <form action="{{ route('skills.store') }}" method="POST">
         @csrf
-        @method('PUT')
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ $skill->title }}" required>
+            <input type="text" name="title" class="form-control" required>
         </div>
 
         <div class="form-group">
             <label for="progress">Progress (%)</label>
-            <input type="number" name="progress" class="form-control" value="{{ $skill->progress }}" required min="0" max="100">
+            <input type="number" name="progress" class="form-control" required min="0" max="100">
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
-
 
 
                 </div>

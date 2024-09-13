@@ -45,33 +45,33 @@
           <div class="col-12 col-lg-12">
             <div class="card">
                 <div class="card-body p-4">
- <h1>Edit Skill</h1>
+                     @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="{{ route('skills.update', $skill->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ $skill->title }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="progress">Progress (%)</label>
-            <input type="number" name="progress" class="form-control" value="{{ $skill->progress }}" required min="0" max="100">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+        <form action="{{ route('expertise.update', $expertise->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="icon">Icon</label>
+                <input type="text" name="icon" class="form-control" value="{{ $expertise->icon }}" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" value="{{ $expertise->title }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" required>{{ $expertise->description }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
 
 
 

@@ -17,7 +17,41 @@
       <x-breadcrumbs />
 	<!--end breadcrumb-->
 
+        <div class="row">
+          <div class="col-12 col-lg-12">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h5 class="mb-4">Edit Hero Area</h5>
+                  <form action="{{ route('resume.update', $resume->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div>
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ $resume->name }}" required>
+        </div>
+        <div>
+            <label>Skill Year:</label>
+            <input type="text" name="skill_year" value="{{ $resume->skill_year }}" required>
+        </div>
+        <div>
+            <label>Description:</label>
+            <input type="text" name="description" value="{{ $resume->description }}" required>
+        </div>
+        <div>
+            <label>Designation:</label>
+            <input type="text" name="designation" value="{{ $resume->designation }}" required>
+        </div>
+        <button type="submit">Update</button>
+    </form>
 
+
+
+                </div>
+            </div>
+
+
+         </div><!--end row-->
+    </div>
 
     </div>
   </main>

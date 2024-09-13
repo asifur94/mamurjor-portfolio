@@ -16,8 +16,40 @@
       <!--breadcrumb-->
       <x-breadcrumbs />
 	<!--end breadcrumb-->
+ <div class="row">
+          <div class="col-12 col-lg-12">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h5 class="mb-4">Edit Hero Area</h5>
+                  <form action="{{ route('resume.store') }}" method="POST">
+        @csrf
+        <div>
+            <label>Name:</label>
+            <input type="text" name="name" required>
+        </div>
+        <div>
+            <label>Skill Year:</label>
+            <input type="text" name="skill_year" required>
+        </div>
+        <div>
+            <label>Description:</label>
+            <input type="text" name="description" required>
+        </div>
+        <div>
+            <label>Designation:</label>
+            <input type="text" name="designation" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
 
 
+
+                </div>
+            </div>
+
+
+         </div><!--end row-->
+    </div>
 
     </div>
   </main>
